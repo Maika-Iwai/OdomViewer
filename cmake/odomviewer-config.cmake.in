@@ -1,0 +1,54 @@
+# OdomViewer CMake config file
+#
+# This file sets the following variables:
+# OdomViewer_FOUND - Always TRUE.
+# OdomViewer_INCLUDE_DIRS - Directories containing the OdomViewer include files.
+# OdomViewer_IDL_DIRS - Directories containing the OdomViewer IDL files.
+# OdomViewer_LIBRARIES - Libraries needed to use OdomViewer.
+# OdomViewer_DEFINITIONS - Compiler flags for OdomViewer.
+# OdomViewer_VERSION - The version of OdomViewer found.
+# OdomViewer_VERSION_MAJOR - The major version of OdomViewer found.
+# OdomViewer_VERSION_MINOR - The minor version of OdomViewer found.
+# OdomViewer_VERSION_REVISION - The revision version of OdomViewer found.
+# OdomViewer_VERSION_CANDIDATE - The candidate version of OdomViewer found.
+
+message(STATUS "Found OdomViewer-@PROJECT_VERSION@")
+set(OdomViewer_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(OdomViewer_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(OdomViewer_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(OdomViewer_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(OdomViewer_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(OdomViewer_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(OdomViewer_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(OdomViewer_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(OdomViewer_VERSION @PROJECT_VERSION@)
+set(OdomViewer_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(OdomViewer_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(OdomViewer_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(OdomViewer_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+

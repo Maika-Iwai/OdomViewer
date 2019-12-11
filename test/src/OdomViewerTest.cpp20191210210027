@@ -1,0 +1,165 @@
+﻿// -*- C++ -*-
+/*!
+ * @file  OdomViewerTest.cpp
+ * @brief Odometry Viewer RTC
+ * @date $Date$
+ *
+ * $Id$
+ */
+
+#include "OdomViewerTest.h"
+
+// Module specification
+// <rtc-template block="module_spec">
+static const char* odomviewer_spec[] =
+  {
+    "implementation_id", "OdomViewerTest",
+    "type_name",         "OdomViewerTest",
+    "description",       "Odometry Viewer RTC",
+    "version",           "1.0.0",
+    "vendor",            "Maika Iwai, Robot System Design Laboratory, Meijo University",
+    "category",          "ImageProcessing",
+    "activity_type",     "PERIODIC",
+    "kind",              "DataFlowComponent",
+    "max_instance",      "1",
+    "language",          "C++",
+    "lang_type",         "compile",
+    ""
+  };
+// </rtc-template>
+
+/*!
+ * @brief constructor
+ * @param manager Maneger Object
+ */
+OdomViewerTest::OdomViewerTest(RTC::Manager* manager)
+    // <rtc-template block="initializer">
+  : RTC::DataFlowComponentBase(manager),
+    m_pose3DQuaternionIn("Pose3DQuaternion", m_pose3DQuaternion)
+
+    // </rtc-template>
+{
+}
+
+/*!
+ * @brief destructor
+ */
+OdomViewerTest::~OdomViewerTest()
+{
+}
+
+
+
+RTC::ReturnCode_t OdomViewerTest::onInitialize()
+{
+  // Registration: InPort/OutPort/Service
+  // <rtc-template block="registration">
+  // Set InPort buffers
+  
+  // Set OutPort buffer
+  addOutPort("Pose3DQuaternion", m_pose3DQuaternionOut);
+  
+  // Set service provider to Ports
+  
+  // Set service consumers to Ports
+  
+  // Set CORBA Service Ports
+  
+  // </rtc-template>
+
+  // <rtc-template block="bind_config">
+  // </rtc-template>
+  
+  return RTC::RTC_OK;
+}
+
+/*
+RTC::ReturnCode_t OdomViewerTest::onFinalize()
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t OdomViewerTest::onStartup(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t OdomViewerTest::onShutdown(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+
+RTC::ReturnCode_t OdomViewerTest::onActivated(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+
+
+RTC::ReturnCode_t OdomViewerTest::onDeactivated(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+
+
+RTC::ReturnCode_t OdomViewerTest::onExecute(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+
+/*
+RTC::ReturnCode_t OdomViewerTest::onAborting(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t OdomViewerTest::onError(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t OdomViewerTest::onReset(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t OdomViewerTest::onStateUpdate(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t OdomViewerTest::onRateChanged(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+
+
+extern "C"
+{
+ 
+  void OdomViewerTestInit(RTC::Manager* manager)
+  {
+    coil::Properties profile(odomviewer_spec);
+    manager->registerFactory(profile,
+                             RTC::Create<OdomViewerTest>,
+                             RTC::Delete<OdomViewerTest>);
+  }
+  
+};
+
+

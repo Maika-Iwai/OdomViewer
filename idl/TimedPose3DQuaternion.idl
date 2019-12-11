@@ -1,0 +1,18 @@
+#ifndef TimedPose3D_idl
+#define TimedPose3D_idl
+
+#include "BasicDataType.idl"
+#include "ExtendedDataTypes.idl"
+
+module RTC {
+  
+  struct TimedPose3DQuaternion
+  {
+RTC::Time tm;
+RTC::Point3D point3D;
+RTC::Quaternion quaternion;
+  };
+
+};
+
+#endif
